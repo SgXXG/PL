@@ -1,0 +1,1112 @@
+Terminals unused in grammar
+
+   DIAP
+   ERR
+
+
+State 61 conflicts: 9 shift/reduce
+State 62 conflicts: 9 shift/reduce
+State 63 conflicts: 9 shift/reduce
+State 64 conflicts: 9 shift/reduce
+State 65 conflicts: 9 shift/reduce
+State 66 conflicts: 5 shift/reduce
+State 67 conflicts: 5 shift/reduce
+State 68 conflicts: 5 shift/reduce
+State 69 conflicts: 5 shift/reduce
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: importpart mainpart
+
+    2 importpart: /* empty */
+    3           | importpart WITH ID SEMICOLON
+    4           | importpart USE ID SEMICOLON
+
+    5 mainpart: /* empty */
+    6         | mainpart proc
+
+    7 proc: PROCEDURE ID IS declBlock BEG procbody END ID SEMICOLON
+
+    8 procbody: opBlock
+
+    9 opBlock: /* empty */
+   10        | opBlock stmt
+
+   11 stmt: assignment
+   12     | WHILE condition LOOP opBlock END LOOP SEMICOLON
+   13     | proccall
+
+   14 proccall: ID SEMICOLON
+   15         | ID '(' arguments ')' SEMICOLON
+
+   16 arguments: expr
+   17          | arguments ',' expr
+
+   18 declBlock: /* empty */
+   19          | declBlock varDecl
+
+   20 varDecl: ID ':' ID SEMICOLON
+
+   21 assignment: ID ASSIGN expr SEMICOLON
+
+   22 condition: expr LESS expr
+   23          | expr LESSEQUAL expr
+   24          | expr MORE expr
+   25          | expr MOREEQUAL expr
+   26          | expr EQUAL expr
+
+   27 expr: ID
+   28     | NUMLIT
+   29     | STRLIT
+   30     | '(' expr ')'
+   31     | expr '+' expr
+   32     | expr '-' expr
+   33     | expr '*' expr
+   34     | expr '/' expr
+   35     | condition
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40) 15 30
+')' (41) 15 30
+'*' (42) 33
+'+' (43) 31
+',' (44) 17
+'-' (45) 32
+'/' (47) 34
+':' (58) 20
+error (256)
+ASSIGN (258) 21
+ID (259) 3 4 7 14 15 20 21 27
+WITH (260) 3
+USE (261) 4
+PROCEDURE (262) 7
+IS (263) 7
+BEG (264) 7
+END (265) 7 12
+DIAP (266)
+SEMICOLON (267) 3 4 7 12 14 15 20 21
+STRLIT (268) 29
+NUMLIT (269) 28
+WHILE (270) 12
+LOOP (271) 12
+LESS (272) 22
+MORE (273) 24
+MOREEQUAL (274) 25
+LESSEQUAL (275) 23
+EQUAL (276) 26
+ERR (277)
+
+
+Nonterminals, with rules where they appear
+
+$accept (31)
+    on left: 0
+program (32)
+    on left: 1, on right: 0
+importpart (33)
+    on left: 2 3 4, on right: 1 3 4
+mainpart (34)
+    on left: 5 6, on right: 1 6
+proc (35)
+    on left: 7, on right: 6
+procbody (36)
+    on left: 8, on right: 7
+opBlock (37)
+    on left: 9 10, on right: 8 10 12
+stmt (38)
+    on left: 11 12 13, on right: 10
+proccall (39)
+    on left: 14 15, on right: 13
+arguments (40)
+    on left: 16 17, on right: 15 17
+declBlock (41)
+    on left: 18 19, on right: 7 19
+varDecl (42)
+    on left: 20, on right: 19
+assignment (43)
+    on left: 21, on right: 11
+condition (44)
+    on left: 22 23 24 25 26, on right: 12 35
+expr (45)
+    on left: 27 28 29 30 31 32 33 34 35, on right: 16 17 21 22 23 24
+    25 26 30 31 32 33 34
+
+
+state 0
+
+    0 $accept: . program $end
+
+    $default  reduce using rule 2 (importpart)
+
+    program     go to state 1
+    importpart  go to state 2
+
+
+state 1
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 3
+
+
+state 2
+
+    1 program: importpart . mainpart
+    3 importpart: importpart . WITH ID SEMICOLON
+    4           | importpart . USE ID SEMICOLON
+
+    WITH  shift, and go to state 4
+    USE   shift, and go to state 5
+
+    $default  reduce using rule 5 (mainpart)
+
+    mainpart  go to state 6
+
+
+state 3
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+state 4
+
+    3 importpart: importpart WITH . ID SEMICOLON
+
+    ID  shift, and go to state 7
+
+
+state 5
+
+    4 importpart: importpart USE . ID SEMICOLON
+
+    ID  shift, and go to state 8
+
+
+state 6
+
+    1 program: importpart mainpart .
+    6 mainpart: mainpart . proc
+
+    PROCEDURE  shift, and go to state 9
+
+    $default  reduce using rule 1 (program)
+
+    proc  go to state 10
+
+
+state 7
+
+    3 importpart: importpart WITH ID . SEMICOLON
+
+    SEMICOLON  shift, and go to state 11
+
+
+state 8
+
+    4 importpart: importpart USE ID . SEMICOLON
+
+    SEMICOLON  shift, and go to state 12
+
+
+state 9
+
+    7 proc: PROCEDURE . ID IS declBlock BEG procbody END ID SEMICOLON
+
+    ID  shift, and go to state 13
+
+
+state 10
+
+    6 mainpart: mainpart proc .
+
+    $default  reduce using rule 6 (mainpart)
+
+
+state 11
+
+    3 importpart: importpart WITH ID SEMICOLON .
+
+    $default  reduce using rule 3 (importpart)
+
+
+state 12
+
+    4 importpart: importpart USE ID SEMICOLON .
+
+    $default  reduce using rule 4 (importpart)
+
+
+state 13
+
+    7 proc: PROCEDURE ID . IS declBlock BEG procbody END ID SEMICOLON
+
+    IS  shift, and go to state 14
+
+
+state 14
+
+    7 proc: PROCEDURE ID IS . declBlock BEG procbody END ID SEMICOLON
+
+    $default  reduce using rule 18 (declBlock)
+
+    declBlock  go to state 15
+
+
+state 15
+
+    7 proc: PROCEDURE ID IS declBlock . BEG procbody END ID SEMICOLON
+   19 declBlock: declBlock . varDecl
+
+    ID   shift, and go to state 16
+    BEG  shift, and go to state 17
+
+    varDecl  go to state 18
+
+
+state 16
+
+   20 varDecl: ID . ':' ID SEMICOLON
+
+    ':'  shift, and go to state 19
+
+
+state 17
+
+    7 proc: PROCEDURE ID IS declBlock BEG . procbody END ID SEMICOLON
+
+    $default  reduce using rule 9 (opBlock)
+
+    procbody  go to state 20
+    opBlock   go to state 21
+
+
+state 18
+
+   19 declBlock: declBlock varDecl .
+
+    $default  reduce using rule 19 (declBlock)
+
+
+state 19
+
+   20 varDecl: ID ':' . ID SEMICOLON
+
+    ID  shift, and go to state 22
+
+
+state 20
+
+    7 proc: PROCEDURE ID IS declBlock BEG procbody . END ID SEMICOLON
+
+    END  shift, and go to state 23
+
+
+state 21
+
+    8 procbody: opBlock .
+   10 opBlock: opBlock . stmt
+
+    ID     shift, and go to state 24
+    WHILE  shift, and go to state 25
+
+    $default  reduce using rule 8 (procbody)
+
+    stmt        go to state 26
+    proccall    go to state 27
+    assignment  go to state 28
+
+
+state 22
+
+   20 varDecl: ID ':' ID . SEMICOLON
+
+    SEMICOLON  shift, and go to state 29
+
+
+state 23
+
+    7 proc: PROCEDURE ID IS declBlock BEG procbody END . ID SEMICOLON
+
+    ID  shift, and go to state 30
+
+
+state 24
+
+   14 proccall: ID . SEMICOLON
+   15         | ID . '(' arguments ')' SEMICOLON
+   21 assignment: ID . ASSIGN expr SEMICOLON
+
+    ASSIGN     shift, and go to state 31
+    SEMICOLON  shift, and go to state 32
+    '('        shift, and go to state 33
+
+
+state 25
+
+   12 stmt: WHILE . condition LOOP opBlock END LOOP SEMICOLON
+
+    ID      shift, and go to state 34
+    STRLIT  shift, and go to state 35
+    NUMLIT  shift, and go to state 36
+    '('     shift, and go to state 37
+
+    condition  go to state 38
+    expr       go to state 39
+
+
+state 26
+
+   10 opBlock: opBlock stmt .
+
+    $default  reduce using rule 10 (opBlock)
+
+
+state 27
+
+   13 stmt: proccall .
+
+    $default  reduce using rule 13 (stmt)
+
+
+state 28
+
+   11 stmt: assignment .
+
+    $default  reduce using rule 11 (stmt)
+
+
+state 29
+
+   20 varDecl: ID ':' ID SEMICOLON .
+
+    $default  reduce using rule 20 (varDecl)
+
+
+state 30
+
+    7 proc: PROCEDURE ID IS declBlock BEG procbody END ID . SEMICOLON
+
+    SEMICOLON  shift, and go to state 40
+
+
+state 31
+
+   21 assignment: ID ASSIGN . expr SEMICOLON
+
+    ID      shift, and go to state 34
+    STRLIT  shift, and go to state 35
+    NUMLIT  shift, and go to state 36
+    '('     shift, and go to state 37
+
+    condition  go to state 41
+    expr       go to state 42
+
+
+state 32
+
+   14 proccall: ID SEMICOLON .
+
+    $default  reduce using rule 14 (proccall)
+
+
+state 33
+
+   15 proccall: ID '(' . arguments ')' SEMICOLON
+
+    ID      shift, and go to state 34
+    STRLIT  shift, and go to state 35
+    NUMLIT  shift, and go to state 36
+    '('     shift, and go to state 37
+
+    arguments  go to state 43
+    condition  go to state 41
+    expr       go to state 44
+
+
+state 34
+
+   27 expr: ID .
+
+    $default  reduce using rule 27 (expr)
+
+
+state 35
+
+   29 expr: STRLIT .
+
+    $default  reduce using rule 29 (expr)
+
+
+state 36
+
+   28 expr: NUMLIT .
+
+    $default  reduce using rule 28 (expr)
+
+
+state 37
+
+   30 expr: '(' . expr ')'
+
+    ID      shift, and go to state 34
+    STRLIT  shift, and go to state 35
+    NUMLIT  shift, and go to state 36
+    '('     shift, and go to state 37
+
+    condition  go to state 41
+    expr       go to state 45
+
+
+state 38
+
+   12 stmt: WHILE condition . LOOP opBlock END LOOP SEMICOLON
+   35 expr: condition .
+
+    LOOP  shift, and go to state 46
+
+    $default  reduce using rule 35 (expr)
+
+
+state 39
+
+   22 condition: expr . LESS expr
+   23          | expr . LESSEQUAL expr
+   24          | expr . MORE expr
+   25          | expr . MOREEQUAL expr
+   26          | expr . EQUAL expr
+   31 expr: expr . '+' expr
+   32     | expr . '-' expr
+   33     | expr . '*' expr
+   34     | expr . '/' expr
+
+    LESS       shift, and go to state 47
+    MORE       shift, and go to state 48
+    MOREEQUAL  shift, and go to state 49
+    LESSEQUAL  shift, and go to state 50
+    EQUAL      shift, and go to state 51
+    '+'        shift, and go to state 52
+    '-'        shift, and go to state 53
+    '*'        shift, and go to state 54
+    '/'        shift, and go to state 55
+
+
+state 40
+
+    7 proc: PROCEDURE ID IS declBlock BEG procbody END ID SEMICOLON .
+
+    $default  reduce using rule 7 (proc)
+
+
+state 41
+
+   35 expr: condition .
+
+    $default  reduce using rule 35 (expr)
+
+
+state 42
+
+   21 assignment: ID ASSIGN expr . SEMICOLON
+   22 condition: expr . LESS expr
+   23          | expr . LESSEQUAL expr
+   24          | expr . MORE expr
+   25          | expr . MOREEQUAL expr
+   26          | expr . EQUAL expr
+   31 expr: expr . '+' expr
+   32     | expr . '-' expr
+   33     | expr . '*' expr
+   34     | expr . '/' expr
+
+    SEMICOLON  shift, and go to state 56
+    LESS       shift, and go to state 47
+    MORE       shift, and go to state 48
+    MOREEQUAL  shift, and go to state 49
+    LESSEQUAL  shift, and go to state 50
+    EQUAL      shift, and go to state 51
+    '+'        shift, and go to state 52
+    '-'        shift, and go to state 53
+    '*'        shift, and go to state 54
+    '/'        shift, and go to state 55
+
+
+state 43
+
+   15 proccall: ID '(' arguments . ')' SEMICOLON
+   17 arguments: arguments . ',' expr
+
+    ')'  shift, and go to state 57
+    ','  shift, and go to state 58
+
+
+state 44
+
+   16 arguments: expr .
+   22 condition: expr . LESS expr
+   23          | expr . LESSEQUAL expr
+   24          | expr . MORE expr
+   25          | expr . MOREEQUAL expr
+   26          | expr . EQUAL expr
+   31 expr: expr . '+' expr
+   32     | expr . '-' expr
+   33     | expr . '*' expr
+   34     | expr . '/' expr
+
+    LESS       shift, and go to state 47
+    MORE       shift, and go to state 48
+    MOREEQUAL  shift, and go to state 49
+    LESSEQUAL  shift, and go to state 50
+    EQUAL      shift, and go to state 51
+    '+'        shift, and go to state 52
+    '-'        shift, and go to state 53
+    '*'        shift, and go to state 54
+    '/'        shift, and go to state 55
+
+    $default  reduce using rule 16 (arguments)
+
+
+state 45
+
+   22 condition: expr . LESS expr
+   23          | expr . LESSEQUAL expr
+   24          | expr . MORE expr
+   25          | expr . MOREEQUAL expr
+   26          | expr . EQUAL expr
+   30 expr: '(' expr . ')'
+   31     | expr . '+' expr
+   32     | expr . '-' expr
+   33     | expr . '*' expr
+   34     | expr . '/' expr
+
+    LESS       shift, and go to state 47
+    MORE       shift, and go to state 48
+    MOREEQUAL  shift, and go to state 49
+    LESSEQUAL  shift, and go to state 50
+    EQUAL      shift, and go to state 51
+    '+'        shift, and go to state 52
+    '-'        shift, and go to state 53
+    '*'        shift, and go to state 54
+    '/'        shift, and go to state 55
+    ')'        shift, and go to state 59
+
+
+state 46
+
+   12 stmt: WHILE condition LOOP . opBlock END LOOP SEMICOLON
+
+    $default  reduce using rule 9 (opBlock)
+
+    opBlock  go to state 60
+
+
+state 47
+
+   22 condition: expr LESS . expr
+
+    ID      shift, and go to state 34
+    STRLIT  shift, and go to state 35
+    NUMLIT  shift, and go to state 36
+    '('     shift, and go to state 37
+
+    condition  go to state 41
+    expr       go to state 61
+
+
+state 48
+
+   24 condition: expr MORE . expr
+
+    ID      shift, and go to state 34
+    STRLIT  shift, and go to state 35
+    NUMLIT  shift, and go to state 36
+    '('     shift, and go to state 37
+
+    condition  go to state 41
+    expr       go to state 62
+
+
+state 49
+
+   25 condition: expr MOREEQUAL . expr
+
+    ID      shift, and go to state 34
+    STRLIT  shift, and go to state 35
+    NUMLIT  shift, and go to state 36
+    '('     shift, and go to state 37
+
+    condition  go to state 41
+    expr       go to state 63
+
+
+state 50
+
+   23 condition: expr LESSEQUAL . expr
+
+    ID      shift, and go to state 34
+    STRLIT  shift, and go to state 35
+    NUMLIT  shift, and go to state 36
+    '('     shift, and go to state 37
+
+    condition  go to state 41
+    expr       go to state 64
+
+
+state 51
+
+   26 condition: expr EQUAL . expr
+
+    ID      shift, and go to state 34
+    STRLIT  shift, and go to state 35
+    NUMLIT  shift, and go to state 36
+    '('     shift, and go to state 37
+
+    condition  go to state 41
+    expr       go to state 65
+
+
+state 52
+
+   31 expr: expr '+' . expr
+
+    ID      shift, and go to state 34
+    STRLIT  shift, and go to state 35
+    NUMLIT  shift, and go to state 36
+    '('     shift, and go to state 37
+
+    condition  go to state 41
+    expr       go to state 66
+
+
+state 53
+
+   32 expr: expr '-' . expr
+
+    ID      shift, and go to state 34
+    STRLIT  shift, and go to state 35
+    NUMLIT  shift, and go to state 36
+    '('     shift, and go to state 37
+
+    condition  go to state 41
+    expr       go to state 67
+
+
+state 54
+
+   33 expr: expr '*' . expr
+
+    ID      shift, and go to state 34
+    STRLIT  shift, and go to state 35
+    NUMLIT  shift, and go to state 36
+    '('     shift, and go to state 37
+
+    condition  go to state 41
+    expr       go to state 68
+
+
+state 55
+
+   34 expr: expr '/' . expr
+
+    ID      shift, and go to state 34
+    STRLIT  shift, and go to state 35
+    NUMLIT  shift, and go to state 36
+    '('     shift, and go to state 37
+
+    condition  go to state 41
+    expr       go to state 69
+
+
+state 56
+
+   21 assignment: ID ASSIGN expr SEMICOLON .
+
+    $default  reduce using rule 21 (assignment)
+
+
+state 57
+
+   15 proccall: ID '(' arguments ')' . SEMICOLON
+
+    SEMICOLON  shift, and go to state 70
+
+
+state 58
+
+   17 arguments: arguments ',' . expr
+
+    ID      shift, and go to state 34
+    STRLIT  shift, and go to state 35
+    NUMLIT  shift, and go to state 36
+    '('     shift, and go to state 37
+
+    condition  go to state 41
+    expr       go to state 71
+
+
+state 59
+
+   30 expr: '(' expr ')' .
+
+    $default  reduce using rule 30 (expr)
+
+
+state 60
+
+   10 opBlock: opBlock . stmt
+   12 stmt: WHILE condition LOOP opBlock . END LOOP SEMICOLON
+
+    ID     shift, and go to state 24
+    END    shift, and go to state 72
+    WHILE  shift, and go to state 25
+
+    stmt        go to state 26
+    proccall    go to state 27
+    assignment  go to state 28
+
+
+state 61
+
+   22 condition: expr . LESS expr
+   22          | expr LESS expr .
+   23          | expr . LESSEQUAL expr
+   24          | expr . MORE expr
+   25          | expr . MOREEQUAL expr
+   26          | expr . EQUAL expr
+   31 expr: expr . '+' expr
+   32     | expr . '-' expr
+   33     | expr . '*' expr
+   34     | expr . '/' expr
+
+    LESS       shift, and go to state 47
+    MORE       shift, and go to state 48
+    MOREEQUAL  shift, and go to state 49
+    LESSEQUAL  shift, and go to state 50
+    EQUAL      shift, and go to state 51
+    '+'        shift, and go to state 52
+    '-'        shift, and go to state 53
+    '*'        shift, and go to state 54
+    '/'        shift, and go to state 55
+
+    LESS       [reduce using rule 22 (condition)]
+    MORE       [reduce using rule 22 (condition)]
+    MOREEQUAL  [reduce using rule 22 (condition)]
+    LESSEQUAL  [reduce using rule 22 (condition)]
+    EQUAL      [reduce using rule 22 (condition)]
+    '+'        [reduce using rule 22 (condition)]
+    '-'        [reduce using rule 22 (condition)]
+    '*'        [reduce using rule 22 (condition)]
+    '/'        [reduce using rule 22 (condition)]
+    $default   reduce using rule 22 (condition)
+
+
+state 62
+
+   22 condition: expr . LESS expr
+   23          | expr . LESSEQUAL expr
+   24          | expr . MORE expr
+   24          | expr MORE expr .
+   25          | expr . MOREEQUAL expr
+   26          | expr . EQUAL expr
+   31 expr: expr . '+' expr
+   32     | expr . '-' expr
+   33     | expr . '*' expr
+   34     | expr . '/' expr
+
+    LESS       shift, and go to state 47
+    MORE       shift, and go to state 48
+    MOREEQUAL  shift, and go to state 49
+    LESSEQUAL  shift, and go to state 50
+    EQUAL      shift, and go to state 51
+    '+'        shift, and go to state 52
+    '-'        shift, and go to state 53
+    '*'        shift, and go to state 54
+    '/'        shift, and go to state 55
+
+    LESS       [reduce using rule 24 (condition)]
+    MORE       [reduce using rule 24 (condition)]
+    MOREEQUAL  [reduce using rule 24 (condition)]
+    LESSEQUAL  [reduce using rule 24 (condition)]
+    EQUAL      [reduce using rule 24 (condition)]
+    '+'        [reduce using rule 24 (condition)]
+    '-'        [reduce using rule 24 (condition)]
+    '*'        [reduce using rule 24 (condition)]
+    '/'        [reduce using rule 24 (condition)]
+    $default   reduce using rule 24 (condition)
+
+
+state 63
+
+   22 condition: expr . LESS expr
+   23          | expr . LESSEQUAL expr
+   24          | expr . MORE expr
+   25          | expr . MOREEQUAL expr
+   25          | expr MOREEQUAL expr .
+   26          | expr . EQUAL expr
+   31 expr: expr . '+' expr
+   32     | expr . '-' expr
+   33     | expr . '*' expr
+   34     | expr . '/' expr
+
+    LESS       shift, and go to state 47
+    MORE       shift, and go to state 48
+    MOREEQUAL  shift, and go to state 49
+    LESSEQUAL  shift, and go to state 50
+    EQUAL      shift, and go to state 51
+    '+'        shift, and go to state 52
+    '-'        shift, and go to state 53
+    '*'        shift, and go to state 54
+    '/'        shift, and go to state 55
+
+    LESS       [reduce using rule 25 (condition)]
+    MORE       [reduce using rule 25 (condition)]
+    MOREEQUAL  [reduce using rule 25 (condition)]
+    LESSEQUAL  [reduce using rule 25 (condition)]
+    EQUAL      [reduce using rule 25 (condition)]
+    '+'        [reduce using rule 25 (condition)]
+    '-'        [reduce using rule 25 (condition)]
+    '*'        [reduce using rule 25 (condition)]
+    '/'        [reduce using rule 25 (condition)]
+    $default   reduce using rule 25 (condition)
+
+
+state 64
+
+   22 condition: expr . LESS expr
+   23          | expr . LESSEQUAL expr
+   23          | expr LESSEQUAL expr .
+   24          | expr . MORE expr
+   25          | expr . MOREEQUAL expr
+   26          | expr . EQUAL expr
+   31 expr: expr . '+' expr
+   32     | expr . '-' expr
+   33     | expr . '*' expr
+   34     | expr . '/' expr
+
+    LESS       shift, and go to state 47
+    MORE       shift, and go to state 48
+    MOREEQUAL  shift, and go to state 49
+    LESSEQUAL  shift, and go to state 50
+    EQUAL      shift, and go to state 51
+    '+'        shift, and go to state 52
+    '-'        shift, and go to state 53
+    '*'        shift, and go to state 54
+    '/'        shift, and go to state 55
+
+    LESS       [reduce using rule 23 (condition)]
+    MORE       [reduce using rule 23 (condition)]
+    MOREEQUAL  [reduce using rule 23 (condition)]
+    LESSEQUAL  [reduce using rule 23 (condition)]
+    EQUAL      [reduce using rule 23 (condition)]
+    '+'        [reduce using rule 23 (condition)]
+    '-'        [reduce using rule 23 (condition)]
+    '*'        [reduce using rule 23 (condition)]
+    '/'        [reduce using rule 23 (condition)]
+    $default   reduce using rule 23 (condition)
+
+
+state 65
+
+   22 condition: expr . LESS expr
+   23          | expr . LESSEQUAL expr
+   24          | expr . MORE expr
+   25          | expr . MOREEQUAL expr
+   26          | expr . EQUAL expr
+   26          | expr EQUAL expr .
+   31 expr: expr . '+' expr
+   32     | expr . '-' expr
+   33     | expr . '*' expr
+   34     | expr . '/' expr
+
+    LESS       shift, and go to state 47
+    MORE       shift, and go to state 48
+    MOREEQUAL  shift, and go to state 49
+    LESSEQUAL  shift, and go to state 50
+    EQUAL      shift, and go to state 51
+    '+'        shift, and go to state 52
+    '-'        shift, and go to state 53
+    '*'        shift, and go to state 54
+    '/'        shift, and go to state 55
+
+    LESS       [reduce using rule 26 (condition)]
+    MORE       [reduce using rule 26 (condition)]
+    MOREEQUAL  [reduce using rule 26 (condition)]
+    LESSEQUAL  [reduce using rule 26 (condition)]
+    EQUAL      [reduce using rule 26 (condition)]
+    '+'        [reduce using rule 26 (condition)]
+    '-'        [reduce using rule 26 (condition)]
+    '*'        [reduce using rule 26 (condition)]
+    '/'        [reduce using rule 26 (condition)]
+    $default   reduce using rule 26 (condition)
+
+
+state 66
+
+   22 condition: expr . LESS expr
+   23          | expr . LESSEQUAL expr
+   24          | expr . MORE expr
+   25          | expr . MOREEQUAL expr
+   26          | expr . EQUAL expr
+   31 expr: expr . '+' expr
+   31     | expr '+' expr .
+   32     | expr . '-' expr
+   33     | expr . '*' expr
+   34     | expr . '/' expr
+
+    LESS       shift, and go to state 47
+    MORE       shift, and go to state 48
+    MOREEQUAL  shift, and go to state 49
+    LESSEQUAL  shift, and go to state 50
+    EQUAL      shift, and go to state 51
+    '*'        shift, and go to state 54
+    '/'        shift, and go to state 55
+
+    LESS       [reduce using rule 31 (expr)]
+    MORE       [reduce using rule 31 (expr)]
+    MOREEQUAL  [reduce using rule 31 (expr)]
+    LESSEQUAL  [reduce using rule 31 (expr)]
+    EQUAL      [reduce using rule 31 (expr)]
+    $default   reduce using rule 31 (expr)
+
+
+state 67
+
+   22 condition: expr . LESS expr
+   23          | expr . LESSEQUAL expr
+   24          | expr . MORE expr
+   25          | expr . MOREEQUAL expr
+   26          | expr . EQUAL expr
+   31 expr: expr . '+' expr
+   32     | expr . '-' expr
+   32     | expr '-' expr .
+   33     | expr . '*' expr
+   34     | expr . '/' expr
+
+    LESS       shift, and go to state 47
+    MORE       shift, and go to state 48
+    MOREEQUAL  shift, and go to state 49
+    LESSEQUAL  shift, and go to state 50
+    EQUAL      shift, and go to state 51
+    '*'        shift, and go to state 54
+    '/'        shift, and go to state 55
+
+    LESS       [reduce using rule 32 (expr)]
+    MORE       [reduce using rule 32 (expr)]
+    MOREEQUAL  [reduce using rule 32 (expr)]
+    LESSEQUAL  [reduce using rule 32 (expr)]
+    EQUAL      [reduce using rule 32 (expr)]
+    $default   reduce using rule 32 (expr)
+
+
+state 68
+
+   22 condition: expr . LESS expr
+   23          | expr . LESSEQUAL expr
+   24          | expr . MORE expr
+   25          | expr . MOREEQUAL expr
+   26          | expr . EQUAL expr
+   31 expr: expr . '+' expr
+   32     | expr . '-' expr
+   33     | expr . '*' expr
+   33     | expr '*' expr .
+   34     | expr . '/' expr
+
+    LESS       shift, and go to state 47
+    MORE       shift, and go to state 48
+    MOREEQUAL  shift, and go to state 49
+    LESSEQUAL  shift, and go to state 50
+    EQUAL      shift, and go to state 51
+
+    LESS       [reduce using rule 33 (expr)]
+    MORE       [reduce using rule 33 (expr)]
+    MOREEQUAL  [reduce using rule 33 (expr)]
+    LESSEQUAL  [reduce using rule 33 (expr)]
+    EQUAL      [reduce using rule 33 (expr)]
+    $default   reduce using rule 33 (expr)
+
+
+state 69
+
+   22 condition: expr . LESS expr
+   23          | expr . LESSEQUAL expr
+   24          | expr . MORE expr
+   25          | expr . MOREEQUAL expr
+   26          | expr . EQUAL expr
+   31 expr: expr . '+' expr
+   32     | expr . '-' expr
+   33     | expr . '*' expr
+   34     | expr . '/' expr
+   34     | expr '/' expr .
+
+    LESS       shift, and go to state 47
+    MORE       shift, and go to state 48
+    MOREEQUAL  shift, and go to state 49
+    LESSEQUAL  shift, and go to state 50
+    EQUAL      shift, and go to state 51
+
+    LESS       [reduce using rule 34 (expr)]
+    MORE       [reduce using rule 34 (expr)]
+    MOREEQUAL  [reduce using rule 34 (expr)]
+    LESSEQUAL  [reduce using rule 34 (expr)]
+    EQUAL      [reduce using rule 34 (expr)]
+    $default   reduce using rule 34 (expr)
+
+
+state 70
+
+   15 proccall: ID '(' arguments ')' SEMICOLON .
+
+    $default  reduce using rule 15 (proccall)
+
+
+state 71
+
+   17 arguments: arguments ',' expr .
+   22 condition: expr . LESS expr
+   23          | expr . LESSEQUAL expr
+   24          | expr . MORE expr
+   25          | expr . MOREEQUAL expr
+   26          | expr . EQUAL expr
+   31 expr: expr . '+' expr
+   32     | expr . '-' expr
+   33     | expr . '*' expr
+   34     | expr . '/' expr
+
+    LESS       shift, and go to state 47
+    MORE       shift, and go to state 48
+    MOREEQUAL  shift, and go to state 49
+    LESSEQUAL  shift, and go to state 50
+    EQUAL      shift, and go to state 51
+    '+'        shift, and go to state 52
+    '-'        shift, and go to state 53
+    '*'        shift, and go to state 54
+    '/'        shift, and go to state 55
+
+    $default  reduce using rule 17 (arguments)
+
+
+state 72
+
+   12 stmt: WHILE condition LOOP opBlock END . LOOP SEMICOLON
+
+    LOOP  shift, and go to state 73
+
+
+state 73
+
+   12 stmt: WHILE condition LOOP opBlock END LOOP . SEMICOLON
+
+    SEMICOLON  shift, and go to state 74
+
+
+state 74
+
+   12 stmt: WHILE condition LOOP opBlock END LOOP SEMICOLON .
+
+    $default  reduce using rule 12 (stmt)

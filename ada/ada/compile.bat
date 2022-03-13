@@ -1,0 +1,1 @@
+bison --defines main.y && flex lex.l && gcc -o main.exe main.tab.c lex.yy.c

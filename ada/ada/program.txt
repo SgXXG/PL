@@ -1,0 +1,20 @@
+with Ada.Text_IO; 
+
+procedure Main is
+use Ada.Text_IO;
+X: Integer;
+A: 12..100;
+begin
+    A := 12;
+    X := A;
+    while X>1 loop
+         New_Line;
+         Count_IO.Put (X);
+         Count_IO.Put (X + 1);
+         X := X + X * 2;
+    end loop;
+
+    if x > A then
+        New_Line;
+    end if;
+end Main;

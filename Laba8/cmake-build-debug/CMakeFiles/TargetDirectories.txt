@@ -1,0 +1,3 @@
+D:/!Studing/Laba8/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/!Studing/Laba8/cmake-build-debug/CMakeFiles/Laba8.dir
+D:/!Studing/Laba8/cmake-build-debug/CMakeFiles/edit_cache.dir

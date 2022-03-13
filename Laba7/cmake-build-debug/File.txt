@@ -1,0 +1,6 @@
+ N  Surname              Name                 Lastname             Division             Birthday
+ 1. Erashov              Artyom               Konstantinovich      employee             15  08  1984 
+ 2. Erashova             Alla                 Konstantinovna       employee             15  08  1984 
+ 3. Garkushenko          Marina               Konstantinovna       employee             16  11  1977 
+ 4. Garkushenko          Sergey               L'vovich             employee             11  09  1975 
+ 5. Garkushenko          Stanislav            Sergeevich           student              02  09  2002 

@@ -1,0 +1,3 @@
+D:/!Studing/2 Course/3 Sem/ЯП/Compilers/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/!Studing/2 Course/3 Sem/ЯП/Compilers/cmake-build-debug/CMakeFiles/Compilers.dir
+D:/!Studing/2 Course/3 Sem/ЯП/Compilers/cmake-build-debug/CMakeFiles/edit_cache.dir

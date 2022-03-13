@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/!Studing/laba10/main.c
+stdio.h
+D:/!Studing/laba10/stdio.h
+stdlib.h
+D:/!Studing/laba10/stdlib.h
+limits.h
+D:/!Studing/laba10/limits.h
+string.h
+D:/!Studing/laba10/string.h
+time.h
+D:/!Studing/laba10/time.h
+
